@@ -2,10 +2,10 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:dart_sockets/print_color.dart';
+import 'package:dart_sockets/utils/print_color.dart';
 
-import 'person.dart';
-import 'poll.dart';
+import 'package:dart_sockets/models/person.dart';
+import 'package:dart_sockets/utils/poll.dart';
 
 void main(List<String> args) async {
   final roomName = args.first;

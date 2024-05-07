@@ -1,6 +1,6 @@
-import 'package:dart_sockets/poll_model.dart';
-import 'package:dart_sockets/question.dart';
-import 'package:dart_sockets/session.dart';
+import 'package:dart_sockets/models/poll_model.dart';
+import 'package:dart_sockets/models/question.dart';
+import 'package:dart_sockets/models/session.dart';
 
 final poll = Poll(
   sessions: [
@@ -11,7 +11,18 @@ final poll = Poll(
         Question(
           question: 'Qual filme ganhou mais oscars?',
           answer: 'Titanic',
-          answered: false,
+        ),
+        Question(
+          question: 'Qual o nome de heroi do Steve Rogers?',
+          answer: 'Capitão América',
+        ),
+        Question(
+          question: 'Qual a verdadeira profissão de Peter Parker?',
+          answer: 'Fotografo',
+        ),
+        Question(
+          question: 'Quem criou os Vingadores?',
+          answer: 'Stan Lee',
         ),
       ],
     ),
@@ -22,24 +33,20 @@ final poll = Poll(
         Question(
           question: 'Quando lançou GTA V?',
           answer: '2013',
-          answered: false,
         ),
         Question(
           question:
               'Qual o nome do jogo de Pokémon onde o inicial é APENAS o Pikachu?',
           answer: 'Yellow',
-          answered: false,
         ),
         Question(
           question:
               'Qual é o verdadeiro nome do personagem de roupa verde nos jogos da série "Zelda"?',
           answer: 'Link',
-          answered: false,
         ),
         Question(
           question: 'Qual console a Microsoft lançou no ano de 2013?',
           answer: 'XBOX ONE',
-          answered: false,
         ),
       ],
     ),
