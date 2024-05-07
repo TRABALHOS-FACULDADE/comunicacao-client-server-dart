@@ -12,7 +12,13 @@ void main(List<String> args) async {
 
   late Person person;
   String? username;
-  final session = poll.sessions.firstWhere((e) => e.name == roomName);
+  final session = poll.getSessionByRoomName(roomName);
+
+  if (session == null) {
+    printColor('Sessão inexistente!', Color.red);
+    return;
+  }
+
   final socket = await Socket.connect('127.0.0.1', session.port);
   printColor('Conectou ao endereço: ${socket.address.address}:${socket.port}',
       Color.green);
@@ -21,14 +27,13 @@ void main(List<String> args) async {
   bool alreadyShowedPoints = false;
 
   do {
-    printColor(
-        "<Room: ${session.name}> Por favor, informe seu nome de usuário:",
+    printColor("${session.roomName} Por favor, informe seu nome de usuário:",
         Color.green);
     username = stdin.readLineSync();
   } while (username == null || username.isEmpty);
 
   person = Person(name: username);
-  socket.write("<Room: ${session.name}> ${person.name} entrou na sala!");
+  socket.write("${session.roomName} ${person.name} entrou na sala!");
 
   socket.listen((Uint8List data) async {
     if (username != null) {
@@ -42,7 +47,7 @@ void main(List<String> args) async {
               (resp.toLowerCase() == pergunta.answer.toLowerCase()) ? 1 : -1;
         }
       }
-      if (session.questions.every((e) => e.answered)) {
+      if (session.allQuestionAnswered) {
         if (!alreadyShowedPoints) {
           socket.write(jsonEncode({
             'personaName': person.name,

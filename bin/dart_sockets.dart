@@ -11,7 +11,7 @@ void main(List<String> args) async {
   final port = poll.sessions.firstWhere((e) => e.name == roomName).port;
   final server = await ServerSocket.bind(InternetAddress.anyIPv4.address, port);
   try {
-    printColor('Server running on port: $port', Color.magenta);
+    printColor('Servidor rodando na porta: $port', Color.magenta);
     server.listen(handle);
   } catch (e) {
     await server.close();
@@ -29,6 +29,7 @@ void handle(Socket client) {
   bool listenedLoggedMessage = false;
 
   client.listen((Uint8List data) {
+    // Decodificação de bytes enviados pelo client
     final message = String.fromCharCodes(data);
 
     if (!listenedLoggedMessage) {
@@ -37,9 +38,9 @@ void handle(Socket client) {
       printColor(message, Color.yellow);
       listenedLoggedMessage = true;
     } else {
+      // Mensagem de finalização
       final infos = jsonDecode(message) as Map<String, dynamic>;
       finishingPlayers.add(infos);
-      // Mensagem de finalização
       printColor(
           '${infos['personaName']} finalizou o quiz da sessão de ${infos['sessionName']} com ${infos['points']} pontos!',
           Color.blue);

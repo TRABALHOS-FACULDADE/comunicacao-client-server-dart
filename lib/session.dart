@@ -10,4 +10,8 @@ class Session {
     required this.name,
     required this.questions,
   });
+
+  String get roomName => '<Room: $name>';
+
+  bool get allQuestionAnswered => questions.every((q) => q.answered);
 }
