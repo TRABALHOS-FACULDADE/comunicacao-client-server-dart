@@ -23,7 +23,7 @@ void main(List<String> args) async {
   printColor('Conectou ao endereço: ${socket.address.address}:${socket.port}',
       Color.green);
 
-  int pontos = 0;
+  int points = 0;
   bool alreadyShowedPoints = false;
 
   do {
@@ -43,7 +43,7 @@ void main(List<String> args) async {
         final resp = stdin.readLineSync();
         if (resp != null && resp.isNotEmpty) {
           pergunta.answered = true;
-          pontos +=
+          points +=
               (resp.toLowerCase() == pergunta.answer.toLowerCase()) ? 1 : -1;
         }
       }
@@ -51,7 +51,7 @@ void main(List<String> args) async {
         if (!alreadyShowedPoints) {
           socket.write(jsonEncode({
             'personaName': person.name,
-            'points': pontos,
+            'points': points,
             'sessionName': session.name
           }));
           alreadyShowedPoints = true;

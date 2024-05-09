@@ -20,6 +20,7 @@ void main(List<String> args) async {
     printColor('Servidor rodando na porta: ${session.port}', Color.magenta);
     server.listen(_handleClient);
   } catch (e) {
+    printColor('Algo deu errado! Desligando servidor...', Color.magenta);
     await server.close();
   }
 }
